@@ -6,19 +6,18 @@
 
 namespace VSAC;
 
-use_module('http');
-use_module('request');
-use_module('router');
-use_module('response');
-
-
 
 //----------------------------------------------------------------------------//
 //-- Implementation                                                         --//
 //----------------------------------------------------------------------------//
 
+function oauth_generic_depends()
+{
+    return array('http', 'request', 'router', 'response');
+}
+
 /** @see oauth_forward_to_provider() */
-function genericoauth_forward_to_provider()
+function oauth_generic_forward_to_provider()
 {
     $base = framework_config('oauth_authorization_url', '');
     $query = array_merge(
@@ -33,13 +32,13 @@ function genericoauth_forward_to_provider()
 }
 
 /** @see oauth_request_code() */
-function genericoauth_request_code()
+function oauth_generic_request_code()
 {
     return request_query('code', false);
 }
 
 /** @see oauth_code_to_token() */
-function genericoauth_code_to_token($code)
+function oauth_generic_code_to_token($code)
 {
     $url = framework_config('oauth_access_token_url', '');
     $data = array_merge(
@@ -64,7 +63,7 @@ function genericoauth_code_to_token($code)
 }
 
 /** @see oauth_token_to_user() */
-function genericoauth_token_to_user($token)
+function oauth_generic_token_to_user($token)
 {
     $url = framework_config('oauth_user_info_url', '');
     $header = framework_config('oauth_user_info_header', '');
@@ -83,7 +82,7 @@ function genericoauth_token_to_user($token)
 
 
 /** @see oauth_user_is_authorized() */
-function genericoauth_user_is_authorized($user)
+function oauth_generic_user_is_authorized($user)
 {
     $field = framework_config('oauth_authorize_match_field', '');
     $authorized_values = framework_config('oauth_authorize_values', array());

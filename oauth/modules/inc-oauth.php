@@ -10,6 +10,11 @@ namespace VSAC;
 //-- Framework required functions                                           --//
 //----------------------------------------------------------------------------//
 
+function oauth_depends()
+{
+    return driver_call('oauth', 'depends');
+}
+
 /** @see example_module_config_items() */
 function oauth_config_items()
 {
@@ -23,7 +28,7 @@ function oauth_sysconfig()
 }
 
 /** @see example_module_test() */
-function example_module_test()
+function oauth_test()
 {
     return true;
 }
